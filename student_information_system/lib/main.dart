@@ -7,13 +7,23 @@ void main() {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Student selectedStudent = Student.withId(0, "", "", 0, "");
+
   List<Student> students = [
-    Student("Ali", "Aydın", 45,
+    Student.withId(1, "Ali", "Aydın", 45,
         "https://cdn.pixabay.com/photo/2014/09/17/11/47/man-449406__340.jpg"),
-    Student("Ayse", "Yılmaz", 90,
-        "https://cdn.pixabay.com/photo/2016/10/19/14/03/model-1753032__340.jpg")
+    Student.withId(2, "Ayse", "Yılmaz", 90,
+        "https://cdn.pixabay.com/photo/2016/10/19/14/03/model-1753032__340.jpg"),
+    Student.withId(3, "Mustafa", "Deniz", 70,
+        "https://cdn.pixabay.com/photo/2016/01/05/11/36/portrait-1122364__340.jpg")
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,19 +34,9 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  String displayExamResult(int score) {
-    String message = "";
-    if (score >= 50) {
-      message = "You passed";
-    } else {
-      message = "You did not passed";
-    }
-    return message;
-  }
-
   void displayMessage(BuildContext context, String message) {
     var alert = AlertDialog(
-      title: Text("Exam Result!"),
+      title: Text("Operation Result"),
       content: Text(message),
     );
     showDialog(context: context, builder: (BuildContext context) => alert);
@@ -56,24 +56,90 @@ class MyApp extends StatelessWidget {
                     title: Text(students[index].firstName +
                         " " +
                         students[index].lastname),
-                    subtitle:
-                        Text("Exam grade: " + students[index].grade.toString()),
+                    subtitle: Text("Exam grade: " +
+                        students[index].grade.toString() +
+                        " [" +
+                        students[index].getStatus +
+                        "]"),
                     trailing: buildStatusIcon(students[index].grade),
                     onTap: () {
-                      print(students[index].firstName +
+                      setState(() {
+                        selectedStudent = students[index];
+                      });
+                      print(selectedStudent.firstName +
                           " " +
-                          students[index].lastname);
+                          selectedStudent.lastname);
                     },
                   );
                 })),
-        Center(
-          child: RaisedButton(
-              child: Text("Click for Exam Result"),
-              onPressed: () {
-                var message = displayExamResult(30);
-                displayMessage(context, message);
-              }),
-        ),
+        Text("Selected student is: " +
+            selectedStudent.firstName +
+            " " +
+            selectedStudent.lastname),
+        Row(
+          children: <Widget>[
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: RaisedButton(
+                  color: Colors.blueAccent,
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.add),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Text("Add"),
+                    ],
+                  ),
+                  onPressed: () {
+                    var message = "Student is added.";
+                    displayMessage(context, message);
+                  }),
+            ),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: RaisedButton(
+                  color: Colors.yellowAccent,
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.update),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Text("Update"),
+                    ],
+                  ),
+                  onPressed: () {
+                    var message = "Student is updated.";
+                    displayMessage(context, message);
+                  }),
+            ),
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 1,
+              child: RaisedButton(
+                  color: Colors.redAccent,
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.delete),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Text("Delete"),
+                    ],
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      students.remove(selectedStudent);
+                    });
+                    var message = "Student is deleted.";
+                    displayMessage(context, message);
+                  }),
+            )
+          ],
+        )
       ],
     );
   }
