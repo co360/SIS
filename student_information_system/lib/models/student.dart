@@ -6,8 +6,7 @@ class Student {
   String url;
   String _status;
 
-  Student.withId(
-      int id, String firstName, String lastName, int grade, String url) {
+  Student.withId(int id, String firstName, String lastName, int grade, String url) {
     this.id = id;
     this.firstName = firstName;
     this.lastname = lastName;
