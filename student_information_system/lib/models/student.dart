@@ -1,25 +1,24 @@
 class Student {
   int id;
   String firstName;
-  String lastname;
+  String lastName;
   int grade;
-  String url;
   String _status;
 
-  Student.withId(int id, String firstName, String lastName, int grade, String url) {
+  Student.withId(int id, String firstName, String lastName, int grade) {
     this.id = id;
     this.firstName = firstName;
-    this.lastname = lastName;
+    this.lastName = lastName;
     this.grade = grade;
-    this.url = url;
   }
 
-  Student(String firstName, String lastName, int grade, String url) {
+  Student(String firstName, String lastName, int grade) {
     this.firstName = firstName;
-    this.lastname = lastName;
+    this.lastName = lastName;
     this.grade = grade;
-    this.url = url;
   }
+
+  Student.withoutInfo();
 
   String get getStatus {
     String message = "";

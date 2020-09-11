@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:student_information_system/models/student.dart';
+import 'package:student_information_system/screens/student_add.dart';
+import 'package:student_information_system/screens/student_update.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -13,15 +15,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Student selectedStudent = Student.withId(0, "", "", 0, "");
+  Student selectedStudent = Student.withId(0, "", "", 0);
 
   List<Student> students = [
-    Student.withId(1, "Ali", "Aydın", 45,
-        "https://cdn.pixabay.com/photo/2014/09/17/11/47/man-449406__340.jpg"),
-    Student.withId(2, "Ayse", "Yılmaz", 90,
-        "https://cdn.pixabay.com/photo/2016/10/19/14/03/model-1753032__340.jpg"),
-    Student.withId(3, "Mustafa", "Deniz", 70,
-        "https://cdn.pixabay.com/photo/2016/01/05/11/36/portrait-1122364__340.jpg")
+    Student.withId(1, "Ali", "Aydın", 45),
+    Student.withId(2, "Ayse", "Yılmaz", 90),
+    Student.withId(3, "Mustafa", "Deniz", 70)
   ];
 
   @override
@@ -51,11 +50,12 @@ class _MyAppState extends State<MyApp> {
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: NetworkImage(students[index].url),
+                      backgroundImage: NetworkImage(
+                          "https://cdn.pixabay.com/photo/2016/01/05/11/36/portrait-1122364__340.jpg"),
                     ),
                     title: Text(students[index].firstName +
                         " " +
-                        students[index].lastname),
+                        students[index].lastName),
                     subtitle: Text("Exam grade: " +
                         students[index].grade.toString() +
                         " [" +
@@ -68,14 +68,14 @@ class _MyAppState extends State<MyApp> {
                       });
                       print(selectedStudent.firstName +
                           " " +
-                          selectedStudent.lastname);
+                          selectedStudent.lastName);
                     },
                   );
                 })),
         Text("Selected student is: " +
             selectedStudent.firstName +
             " " +
-            selectedStudent.lastname),
+            selectedStudent.lastName),
         Row(
           children: <Widget>[
             Flexible(
@@ -93,8 +93,10 @@ class _MyAppState extends State<MyApp> {
                     ],
                   ),
                   onPressed: () {
-                    var message = "Student is added.";
-                    displayMessage(context, message);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => StudentAdd(students)));
                   }),
             ),
             Flexible(
@@ -112,8 +114,11 @@ class _MyAppState extends State<MyApp> {
                     ],
                   ),
                   onPressed: () {
-                    var message = "Student is updated.";
-                    displayMessage(context, message);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                StudentUpdate(selectedStudent)));
                   }),
             ),
             Flexible(
