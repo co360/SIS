@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
 
   List<Student> students = [
     Student.withId(1, "Ali", "Aydın", 45),
-    Student.withId(2, "Ayse", "Yılmaz", 90),
+    Student.withId(2, "Emre", "Yılmaz", 90),
     Student.withId(3, "Mustafa", "Deniz", 70)
   ];
 

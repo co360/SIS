@@ -14,7 +14,7 @@ class StudentValidationMixin {
   String validateGrade(String value) {
     var grade = int.parse(value);
     if (grade < 0 || grade > 100) {
-      return "The grade must be between 0 and 100.";
+      return "The grade must be between 0 and 100!";
     }
   }
 }

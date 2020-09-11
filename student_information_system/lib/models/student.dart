@@ -3,7 +3,6 @@ class Student {
   String firstName;
   String lastName;
   int grade;
-  String _status;
 
   Student.withId(int id, String firstName, String lastName, int grade) {
     this.id = id;

@@ -46,7 +46,7 @@ class _StudentAddState extends State with StudentValidationMixin {
   TextFormField buildFirstNameField() {
     return TextFormField(
       decoration: InputDecoration(
-          labelText: "Name", hintText: "Please enter your name"),
+          labelText: "Name", hintText: "Please enter your name:"),
       validator: validateFirstName,
       onSaved: (String value) {
         student.firstName = value;
@@ -57,7 +57,7 @@ class _StudentAddState extends State with StudentValidationMixin {
   TextFormField buildLastNameField() {
     return TextFormField(
       decoration: InputDecoration(
-          labelText: "Surname", hintText: "Please enter surname"),
+          labelText: "Surname", hintText: "Please enter surname:"),
       validator: validateLastName,
       onSaved: (String value) {
         student.lastName = value;
@@ -68,7 +68,7 @@ class _StudentAddState extends State with StudentValidationMixin {
   TextFormField buildGradeField() {
     return TextFormField(
       decoration:
-          InputDecoration(labelText: "Grade", hintText: "Please enter grade"),
+          InputDecoration(labelText: "Grade", hintText: "Please enter grade:"),
       validator: validateGrade,
       onSaved: (String value) {
         student.grade = int.parse(value);

@@ -26,7 +26,7 @@ class _StudentAddState extends State with StudentValidationMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Adding New Student"),
+        title: Text("Updating Student"),
       ),
       body: Container(
         margin: EdgeInsets.all(20.0),
@@ -48,7 +48,7 @@ class _StudentAddState extends State with StudentValidationMixin {
     return TextFormField(
       initialValue: selectedStudent.firstName,
       decoration: InputDecoration(
-          labelText: "Name", hintText: "Please enter your name"),
+          labelText: "Name", hintText: "Please enter your name:"),
       validator: validateFirstName,
       onSaved: (String value) {
         selectedStudent.firstName = value;
@@ -60,7 +60,7 @@ class _StudentAddState extends State with StudentValidationMixin {
     return TextFormField(
       initialValue: selectedStudent.lastName,
       decoration: InputDecoration(
-          labelText: "Surname", hintText: "Please enter surname"),
+          labelText: "Surname", hintText: "Please enter surname:"),
       validator: validateLastName,
       onSaved: (String value) {
         selectedStudent.lastName = value;
@@ -72,7 +72,7 @@ class _StudentAddState extends State with StudentValidationMixin {
     return TextFormField(
       initialValue: selectedStudent.grade.toString(),
       decoration:
-          InputDecoration(labelText: "Grade", hintText: "Please enter grade"),
+          InputDecoration(labelText: "Grade", hintText: "Please enter grade:"),
       validator: validateGrade,
       onSaved: (String value) {
         selectedStudent.grade = int.parse(value);
